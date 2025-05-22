@@ -9,13 +9,19 @@ phases:
       - mvn clean package
   post_build:
     commands:
-      - echo "Zipping build for deployment"
+      - echo "Preparing app for deployment..."
       - mkdir -p deploy
-      - cp target/*.jar deploy/
+      - cp target/shop-0.0.1-SNAPSHOT.jar deploy/
       - cp appspec.yml deploy/
-      - zip -r app.zip deploy
+      - cp -r scripts deploy/
+      - cd deploy
+      - zip -r ../app.zip .
+      - cd ..
+      - mkdir -p output
+      - mv app.zip output/
+      - chmod +x deploy/scripts/start.sh
 
 artifacts:
   files:
-    - app.zip
+    - output/app.zip
   discard-paths: yes
