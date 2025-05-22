@@ -20,10 +20,9 @@ phases:
       - cd ..
       - mkdir -p output
       - mv app.zip output/
-      - echo "Checking output/"
-      - ls -l output
-
-
+      - echo "Verifying final contents:"
+      - ls -lh output
+      - echo "DONE"
 artifacts:
   files:
     - output/app.zip
