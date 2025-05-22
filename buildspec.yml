@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto21
+  build:
+    commands:
+      - mvn clean package
+  post_build:
+    commands:
+      - echo "Zipping build for deployment"
+      - mkdir -p deploy
+      - cp target/*.jar deploy/
+      - cp appspec.yml deploy/
+      - zip -r app.zip deploy
+
+artifacts:
+  files:
+    - app.zip
+  discard-paths: yes
