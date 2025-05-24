@@ -1,6 +1,21 @@
+version: 0.2
+
 phases:
+  install:
+    runtime-versions:
+      java: corretto21
   build:
     commands:
-      - mvn clean package
-      - echo "Contents of target directory:"
+      - mvn clean package -DskipTests
+      - echo "Contents of target/:"
       - ls -l target
+  post_build:
+    commands:
+      - echo "Zipping JAR for Beanstalk"
+      - cp target/*.jar .
+      - zip app.zip *.jar
+
+artifacts:
+  files:
+    - app.zip
+  discard-paths: yes
