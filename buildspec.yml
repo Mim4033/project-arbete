@@ -6,12 +6,13 @@ phases:
       java: corretto21
   build:
     commands:
-      - mvn clean package -DskipTests=true
-      - mkdir -p deploy
-      - cp target/*.jar deploy/
-      - cd deploy
-      - zip -r ../app.zip .
-      - cd ..
+      - mvn clean package
+  post_build:
+    commands:
+      - echo "Zipping JAR for Beanstalk"
+      - cp target/*.jar .
+      - zip app.zip *.jar
+
 artifacts:
   files:
     - app.zip
