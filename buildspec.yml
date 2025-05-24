@@ -12,8 +12,8 @@ phases:
   post_build:
     commands:
       - echo "Zipping JAR for Beanstalk"
-      - cp target/*.jar .
-      - zip app.zip *.jar
+      - cp target/*.jar application.jar
+      - zip app.zip application.jar
 
 artifacts:
   files:
