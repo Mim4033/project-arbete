@@ -14,6 +14,8 @@ phases:
       - echo "Zipping JAR for Beanstalk"
       - cp target/*.jar application.jar
       - zip app.zip application.jar
+      - unzip -l app.zip  # ← Add this line to list the contents of app.zip
+
 
 artifacts:
   files:
