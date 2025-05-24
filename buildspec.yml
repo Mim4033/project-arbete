@@ -7,17 +7,15 @@ phases:
   build:
     commands:
       - mvn clean package -DskipTests
-      - echo "Contents of target/:"
-      - ls -l target
+      - echo "Build output:"
+      - ls -lh target
   post_build:
     commands:
-      - echo "Zipping JAR for Beanstalk"
+      - echo "Copying .jar to root as application.jar"
       - cp target/*.jar application.jar
-      - zip app.zip application.jar
-      - unzip -l app.zip  # ← Add this line to list the contents of app.zip
-
+      - ls -l application.jar
 
 artifacts:
   files:
-    - app.zip
+    - application.jar
   discard-paths: yes
